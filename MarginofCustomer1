@@ -1,0 +1,13 @@
+library(tidyverse)
+library(readxl)
+PERCENTOFCOSTANALYSIS <- read_excel("WIPACTUALS.xlsx", 
+                         sheet = "PercentofCost")
+head(PERCENTOFCOSTANALYSIS)
+#customer name redacted for privacy
+PERCENTOFCOSTANALYSIS %>% 
+  filter(MarginPercentofRevenue>-1) %>% 
+  filter(CUSTOMER=="Customer Name") %>% 
+  ggplot() + 
+  geom_smooth(aes(MaterialPercentofCost,MarginPercentofRevenue)) +
+  labs(title="Relationship of Material Content to Margin", 
+       subtitle = "Customer: REDACTED")
